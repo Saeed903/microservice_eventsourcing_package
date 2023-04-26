@@ -6,7 +6,7 @@ http:
   port: :5007
   development: true
   basePath: /api/v1
-  managementRiskPath: /api/v1/managementrisk
+  microservicePath: /api/v1/microservice
   debugErrorsResponse: true
   ignoreLogUrls: [ "metrics", "swagger" ]
 probes:
@@ -26,11 +26,11 @@ postgres:
   port: 5432
   user: admin
   password: admin
-  dbName: managementRisks
+  dbName: microservice
   sslMode: false
 kafka:
   brokers: [ "localhost:9093" ]
-  groupID: management_risk_microservice_consumer
+  groupID: microservice_consumer
   initTopics: true
 kafkaTopics:
   eventCreated:
@@ -44,7 +44,7 @@ redis:
   poolSize: 300
 jaeger:
   enable: true
-  serviceName: management_risk_service
+  serviceName: microservice
   hostPort: "localhost:6831"
   logSpans: false
 timeouts:
@@ -56,9 +56,9 @@ mongo:
   uri: "mongodb://localhost:27017"
   user: admin
   password: admin
-  db: managementRisk
+  db: microservicedb
 mongoCollections:
-  managementRisk: managementRisk
+  collectionName: microservice
 kafkaPublisherConfig:
   topic: event_created
   topicPrefix: eventstore
@@ -76,7 +76,7 @@ elasticSearch:
   apiKey: ""
   enableLogging: false
 elasticIndexes:
-  managementRisk: managementRisk
+  microservice: microservice
 migrations:
   enable: true
   recreate: false
